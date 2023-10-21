@@ -21,4 +21,4 @@ Route::get('/', [FilmController::class, 'read']);
 Route::get('/dashboard', [FilmController::class, 'read'])->middleware(['auth'])->name('dashboard');
 Route::POST('/search-film', [FilmController::class, 'search']);
 Route::POST('/add-film', [FilmController::class, 'create']);
-Route::POST('/delete-filmlog', [FilmlogController::class, 'delete']);
+Route::post('/delete-filmlog/{filmlog}', [FilmlogController::class, 'delete']);

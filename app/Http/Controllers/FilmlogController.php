@@ -41,19 +41,11 @@ class FilmlogController extends Controller
         return Auth::user()->filmlogs()->with('film')->get();
     }
 
-    public function delete(Request $request)
+    public function delete(Filmlog $filmlog)
     {
-        $filmlog_id = $request->input('filmlog_id');
-        $title = $request->input('title');
-
-        if ($filmlog_id <= 0) {
-            App::abort(500, 'Error 143'); // Filmlog could not be deleted
-        }
-
-        $filmlog = Filmlog::find($filmlog_id);
+        $title = $filmlog->film->title;
         $filmlog->delete();
-
-        return redirect('')->with('success_delete',$title);
+        return redirect('')->with('success_delete', $title);
     }
 
     /**
