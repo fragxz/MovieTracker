@@ -63,6 +63,7 @@ class FilmlogController extends Controller
         if ($foundFilmlog) {
             return TRUE;
         }
+
         return FALSE;
     }
 }
