@@ -9,6 +9,15 @@ class Film extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'imdb_id',
+        'active',
+        'year',
+        'type',
+        'poster_url',
+    ];
+
     public function filmlogs()
     {
         return $this->hasMany(Filmlog::class);
