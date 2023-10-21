@@ -40,9 +40,12 @@
                     <br>
                     <br>
                         <style>
-                            .card-img-top {
+                            .card-img-top, .card-img-placeholder {
                                 max-height: 300px;
-                                object-fit: cover; /* This ensures the image scales correctly */
+                                height: 300px;
+                                width: 100%;
+                                object-fit: cover;
+                                background-color: #e0e0e0;
                             }
 
                             .card .btn-delete {
@@ -66,7 +69,11 @@
                                     @foreach ($filmlogs as $flog)
                                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                                             <div class="card h-100">
-                                                <img src="{{ $flog->film->poster_url }}" class="card-img-top" alt="{{ $flog->film->title }}">
+                                                @if($flog->film->poster_url)
+                                                    <img src="{{ $flog->film->poster_url }}" class="card-img-top" alt="{{ $flog->film->title }}">
+                                                @else
+                                                    <div class="card-img-placeholder"></div>
+                                                @endif
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ $flog->film->title }} ({{ $flog->film->year }})</h5>
                                                     <form method="POST" action="/delete-filmlog/{{ $flog->id }}">
