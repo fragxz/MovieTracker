@@ -19,8 +19,8 @@ class FilmlogController extends Controller
     {
         $filmlogExists = FilmlogController::findExisting($film_id);
 
-        if ( $filmlogExists ) {
-            return ['ERROR','Could not add Filmlog, it already exists.'];
+        if ($filmlogExists) {
+            return ['ERROR', 'Could not add Filmlog, it already exists.'];
         }
 
         $filmlog = new Filmlog();
@@ -29,7 +29,7 @@ class FilmlogController extends Controller
         $filmlog->status = 'seen';
         $result = $filmlog->save();
 
-        if(!$result){
+        if (!$result) {
             App::abort(500, 'Error 142'); // Filmlog could not be saved
         }
 
@@ -62,7 +62,9 @@ class FilmlogController extends Controller
             ->where('user_id', Auth::id())
             ->first();
 
-        if ($foundFilmlog) { return TRUE; }
+        if ($foundFilmlog) {
+            return TRUE;
+        }
         return FALSE;
     }
 }

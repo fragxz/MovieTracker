@@ -43,7 +43,8 @@ class User extends Authenticatable
     ];
 
     /** Relationship */
-    public function filmlogs() {
+    public function filmlogs()
+    {
         return $this->hasMany(Filmlog::class);
     }
 }

@@ -9,7 +9,8 @@ class Filmlog extends Model
 {
     use HasFactory;
 
-    public function film() {
+    public function film()
+    {
         return $this->belongsTo(Film::class);
     }
 }

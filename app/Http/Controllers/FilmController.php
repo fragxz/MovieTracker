@@ -22,7 +22,7 @@ class FilmController extends Controller
         $filmlogs = FilmlogController::read();
 
         return view('dashboard', [
-            "filmlogs"=>$filmlogs,
+            "filmlogs" => $filmlogs,
         ]);
     }
 
@@ -34,11 +34,11 @@ class FilmController extends Controller
         $films = json_decode($response->body(), TRUE);
 
 
-        if ($films['Response'] == 'False' ) {
-            return redirect('')->with('error',$films['Error']);
+        if ($films['Response'] == 'False') {
+            return redirect('')->with('error', $films['Error']);
         }
 
-        if ( isset($films['Search']) ) {
+        if (isset($films['Search'])) {
             $searchResult = $films['Search'];
             return view('search', ["films" => $searchResult]);
         }
@@ -60,9 +60,9 @@ class FilmController extends Controller
         $result = FilmlogController::create($film->id);
 
         if (isset($result[0]) && $result[0] == 'ERROR') {
-            return redirect('')->with('error',$result[1]);
+            return redirect('')->with('error', $result[1]);
         } else {
-            return redirect('')->with('success_create',$film->title);
+            return redirect('')->with('success_create', $film->title);
         }
     }
 
@@ -77,7 +77,9 @@ class FilmController extends Controller
             ->where('imdb_id', $imdbID)
             ->first();
 
-        if (! $foundFilm) { return FALSE; }
+        if (!$foundFilm) {
+            return FALSE;
+        }
 
         return $foundFilm->id;
     }
