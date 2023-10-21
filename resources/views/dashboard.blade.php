@@ -39,24 +39,6 @@
 
                     <br>
                     <br>
-                        <style>
-                            .card-img-top, .card-img-placeholder {
-                                max-height: 300px;
-                                height: 300px;
-                                width: 100%;
-                                object-fit: cover;
-                                background-color: #e0e0e0;
-                            }
-
-                            .card .btn-delete {
-                                display: none;
-                            }
-
-                            .card:hover .btn-delete {
-                                display: block;
-                            }
-                        </style>
-
                         @isset($filmlogs)
                             <div class="container mt-5">
                                 <h4 class="text-center mb-4"><b>Your Films</b></h4>
