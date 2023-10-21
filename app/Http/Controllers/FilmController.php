@@ -31,7 +31,6 @@ class FilmController extends Controller
         $response = Http::get($requestURL);
         $films = json_decode($response->body(), TRUE);
 
-
         if ($films['Response'] == 'False') {
             return redirect('')->with('error', $films['Error']);
         }
@@ -40,7 +39,6 @@ class FilmController extends Controller
             $searchResult = $films['Search'];
             return view('search', ["films" => $searchResult]);
         }
-
     }
 
     public function create(Request $request)
