@@ -49,30 +49,27 @@
 
                             <div class="container">
                                 <div class="row">
+                                    @foreach ($filmlogs as $flog)
+                                        <div class="col-sm-3 mb-4">
+                                            <div class="text-center w-48" style="text-align: -moz-center;">
+                                                <img src="{{ $flog->film->poster_url }}" width="200px">
 
+                                                {{ $flog->film->title }} ({{ $flog->film->year }})
+                                                <input type="hidden" name="imdbID" value="{{ $flog->film->imdb_id }}">
+                                                <input type="hidden" name="type" value="{{ $flog->film->type }}">
 
-                            @foreach ($filmlogs as $flog)
-                                <div class="col-sm-3 mb-4">
-                                    <div class="text-center w-48" style="text-align: -moz-center;">
-                                        <img src="{{ $flog->poster_url }}" width="200px">
+                                                <form method="POST" action="/delete-filmlog">
+                                                    @csrf
+                                                    <input type="hidden" name="filmlog_id" value="{{ $flog->id }}">
+                                                    <input type="hidden" name="title" value="{{ $flog->film->title }}">
 
-                                        {{ $flog->title }} ({{ $flog->year }})
-                                        <input type="hidden" name="imdbID" value="{{ $flog->imdb_id }}">
-                                        <input type="hidden" name="type" value="{{ $flog->type }}">
-
-                                        <form method="POST" action="/delete-filmlog">
-                                            @csrf
-                                            <input type="hidden" name="filmlog_id" value="{{ $flog->id }}">
-                                            <input type="hidden" name="title" value="{{ $flog->title }}">
-
-                                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 ml-3">
-                                                DELETE
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            @endforeach
-
+                                                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 ml-3">
+                                                        DELETE
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
 

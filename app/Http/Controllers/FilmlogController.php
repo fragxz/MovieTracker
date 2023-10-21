@@ -38,12 +38,7 @@ class FilmlogController extends Controller
 
     public function read()
     {
-        $filmlogs = Film::where('films.active', 1)
-            ->where('user_id', Auth::id())
-            ->leftJoin('filmlogs', 'filmlogs.film_id', '=', 'films.id')
-            ->get();
-
-        return $filmlogs;
+        return Auth::user()->filmlogs()->with('film')->get();
     }
 
     public function delete(Request $request)
