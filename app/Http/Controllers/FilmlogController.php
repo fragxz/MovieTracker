@@ -55,15 +55,9 @@ class FilmlogController extends Controller
      */
     public static function findExisting($film_id)
     {
-        $foundFilmlog = Filmlog::where('active', 1)
+        return Filmlog::where('active', 1)
             ->where('film_id', $film_id)
             ->where('user_id', Auth::id())
-            ->first();
-
-        if ($foundFilmlog) {
-            return TRUE;
-        }
-
-        return FALSE;
+            ->exists();
     }
 }
