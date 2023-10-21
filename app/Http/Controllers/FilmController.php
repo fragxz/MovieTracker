@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Film;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\App;
 
 class FilmController extends Controller
 {
@@ -65,23 +63,4 @@ class FilmController extends Controller
             return redirect('')->with('success_create', $film->title);
         }
     }
-
-    public function update()
-    {
-        // possible idea: update existing films in database via cron..
-    }
-
-    public function findExisting($imdbID)
-    {
-        $foundFilm = Film::where('active', 1)
-            ->where('imdb_id', $imdbID)
-            ->first();
-
-        if (!$foundFilm) {
-            return FALSE;
-        }
-
-        return $foundFilm->id;
-    }
-
 }

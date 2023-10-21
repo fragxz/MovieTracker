@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Film;
 use App\Models\Filmlog;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
