@@ -39,38 +39,52 @@
 
                     <br>
                     <br>
+                        <style>
+                            .card-img-top {
+                                max-height: 300px;
+                                object-fit: cover; /* This ensures the image scales correctly */
+                            }
+
+                            .card .btn-delete {
+                                display: none;
+                            }
+
+                            .card:hover .btn-delete {
+                                display: block;
+                            }
+                        </style>
+
                         @isset($filmlogs)
-                            <h4 class=""><b>Your Films</b></h4>
-                            @if(count($filmlogs) <= 0)
-                            <p class=""><b>You have no films logged yet.</b></p>
-                            @endif
+                            <div class="container mt-5">
+                                <h4 class="text-center mb-4"><b>Your Films</b></h4>
 
-                        <br>
+                                @if(count($filmlogs) <= 0)
+                                    <p class="text-center mb-4"><b>You have no films logged yet.</b></p>
+                                @endif
 
-                            <div class="container">
-                                <div class="row">
+                                <div class="row justify-content-center">
                                     @foreach ($filmlogs as $flog)
-                                        <div class="col-sm-3 mb-4">
-                                            <div class="text-center w-48" style="text-align: -moz-center;">
-                                                <img src="{{ $flog->film->poster_url }}" width="200px">
-
-                                                {{ $flog->film->title }} ({{ $flog->film->year }})
-                                                <input type="hidden" name="imdbID" value="{{ $flog->film->imdb_id }}">
-                                                <input type="hidden" name="type" value="{{ $flog->film->type }}">
-
-                                                <form method="POST" action="/delete-filmlog/{{ $flog->id }}">
-                                                    @csrf
-                                                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 ml-3">
-                                                        DELETE
-                                                    </button>
-                                                </form>
+                                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                                            <div class="card h-100">
+                                                <img src="{{ $flog->film->poster_url }}" class="card-img-top" alt="{{ $flog->film->title }}">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ $flog->film->title }} ({{ $flog->film->year }})</h5>
+                                                    <form method="POST" action="/delete-filmlog/{{ $flog->id }}">
+                                                        @csrf
+                                                        <input type="hidden" name="imdbID" value="{{ $flog->film->imdb_id }}">
+                                                        <input type="hidden" name="type" value="{{ $flog->film->type }}">
+                                                        <button type="submit" class="btn btn-dark btn-sm btn-block mt-3 btn-delete">
+                                                            DELETE
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
-
                         @endisset
+
                 </div>
             </div>
         </div>
