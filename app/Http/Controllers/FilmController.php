@@ -47,42 +47,23 @@ class FilmController extends Controller
 
     public function create(Request $request)
     {
-        $title = $request->input('title');
-        $year = $request->input('year');
-        $imdb_id = $request->input('imdbID');
-        $type = $request->input('type');
-        $poster = $request->input('poster');
+        $film = Film::firstOrCreate(
+            ['imdb_id' => $request->input('imdbID')],
+            [
+                'title' => $request->input('title'),
+                'year' => $request->input('year'),
+                'type' => $request->input('type'),
+                'poster_url' => $request->input('poster')
+            ]
+        );
 
-        $foundFilm = $this->findExisting($imdb_id);
-
-        if ( !$foundFilm ) {
-            $film = new Film;
-            $film->title = $title;
-            $film->year = $year ? $year : '';
-            $film->imdb_id = $imdb_id;
-            $film->type = $type;
-            $film->poster_url = $poster;
-            $result = $film->save();
-
-            if(!$result){
-                App::abort(500, 'Error 142'); // Film could not be saved
-            }
-        }
-
-        if ($foundFilm) {
-            $film_id = $foundFilm;
-        } else {
-            $film_id = $film->id;
-        }
-
-        $result = FilmlogController::create($film_id);
+        $result = FilmlogController::create($film->id);
 
         if (isset($result[0]) && $result[0] == 'ERROR') {
             return redirect('')->with('error',$result[1]);
         } else {
-            return redirect('')->with('success_create',$title);
+            return redirect('')->with('success_create',$film->title);
         }
-
     }
 
     public function update()
