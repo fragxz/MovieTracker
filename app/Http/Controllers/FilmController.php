@@ -12,16 +12,13 @@ class FilmController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
         $this->api_url = env('FILMDATA_API_URL');
         $this->api_key = env('OMDB_API_KEY');
     }
 
     public function read()
     {
-        if (! Auth::User()) {
-            return redirect('/login');
-        }
-
         $filmlogs = FilmlogController::read();
 
         return view('dashboard', [
@@ -31,10 +28,6 @@ class FilmController extends Controller
 
     public function search(Request $request)
     {
-        if (! Auth::User()) {
-            return redirect('/login');
-        }
-
         $search = $request->input('search_film');
         $requestURL = "$this->api_url/?s=$search&apikey=$this->api_key";
         $response = Http::get($requestURL);
@@ -54,10 +47,6 @@ class FilmController extends Controller
 
     public function create(Request $request)
     {
-        if (! Auth::User()) {
-            return redirect('/login');
-        }
-
         $title = $request->input('title');
         $year = $request->input('year');
         $imdb_id = $request->input('imdbID');

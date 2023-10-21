@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class FilmlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function create($film_id)
     {
         $filmlogExists = FilmlogController::findExisting($film_id);
