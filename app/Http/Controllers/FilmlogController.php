@@ -13,7 +13,7 @@ class FilmlogController extends Controller
         $this->middleware('auth');
     }
 
-    public function create($film_id)
+    public static function create($film_id)
     {
         $filmlogExists = FilmlogController::findExisting($film_id);
 
@@ -34,7 +34,7 @@ class FilmlogController extends Controller
         return $result;
     }
 
-    public function read()
+    public static function read()
     {
         return Auth::user()->filmlogs()->with('film')->get();
     }
