@@ -1,6 +1,6 @@
 ## Filmlog: Your Movie Tracker Application
 
-Welcome to Filmlog, a comprehensive movie tracker built on Laravel 8.83.5. This README provides a structured step-by-step guide to help you set up and enjoy the application.
+Welcome to Filmlog, a comprehensive movie tracker built on Laravel 9. This README provides a structured step-by-step guide to help you set up and enjoy the application.
 
 ### 1. Initial Setup:
 
