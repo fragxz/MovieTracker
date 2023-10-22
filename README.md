@@ -35,3 +35,8 @@ Navigate to Directory: Open your terminal and navigate to the directory where yo
 ### 5. Ready to Go!
 
 Now that you've successfully set up Filmlog, dive in and enjoy tracking your favorite movies!
+
+### 6. Testing Configuration:
+If you want more, create a ```.env.testing``` file, based on your ```.env``` file - consider to change your database configuration to not overwrite your existing database.
+
+Then run your tests with the command ```php artisan test```.
